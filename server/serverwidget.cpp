@@ -15,6 +15,8 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QMessageBox>
+#include <QCheckBox>
 
 ServerWidget::ServerWidget(QWidget *parent) :
     QWidget(parent),
@@ -44,10 +46,12 @@ void ServerWidget::init()
 
     connect(ui->ListenpushButton,SIGNAL(clicked(bool)),SLOT(NewLinten())); //点击监听按钮，触发监听
 
-    connect(tcpserverob,SIGNAL(newConnection()), SLOT(AcceptConnect()));   //服务端连接信号,触发槽函数，等待客户端连接
+    connect(tcpserverob,SIGNAL(newConnection()), SLOT(AcceptConnect()));   //服务端新的连接信号,触发槽函数，等待客户端连接
 
     //socket通信连接状态错误提示输出
     connect(tcpsocketob,SIGNAL(error(QAbstractSocket::SocketError)), SLOT(ShowError(QAbstractSocket::SocketError)));
+
+    connect(ui->ServerDelpushButton,SIGNAL(clicked(bool)), SLOT(ClearRecvData())); //点击按钮，触发槽函数--清空TextEdit控件数据
 }
 
 
@@ -105,6 +109,29 @@ void ServerWidget::RecvData()
 {
     QString data = tcpsocketob->readAll();  // 通过socket读取来自客户端的所有数据
 
+    //检测是否选中--写入文件功能
+    if(!ui->ServerCheckBox->isChecked())
+    {
+        qDebug() << "off";
+
+    }else {
+
+         qDebug() << "on";
+        //写入文件--调试日志记录
+        QFile *file = new QFile("ClentTest.txt");
+        if(file->open( QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append ))
+        {
+             QTextStream out(file);
+             out << data;
+             file->flush();
+             file->close();
+        }
+        else {
+              QMessageBox::warning(this, "warning", "open file error", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+              qDebug() << "open file error";
+            }
+}
+
     mchat += ("Recv Client " + data);
     ui->ServerReceDatatextEdit->setText(mchat);
 
@@ -121,3 +148,9 @@ void ServerWidget::ShowError(QAbstractSocket::SocketError)
 }
 
 
+//清空接收到所有的数据
+void ServerWidget::ClearRecvData()
+{
+    ui->ServerReceDatatextEdit->clear();   //清空TextEdit控件里显示的内容
+    mchat = "";                           //清空mchat对象缓存的数据
+}

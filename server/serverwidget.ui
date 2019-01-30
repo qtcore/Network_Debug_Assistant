@@ -131,6 +131,32 @@
     <string>Port:</string>
    </property>
   </widget>
+  <widget class="QCheckBox" name="ServerCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>75</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LogRecord</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ServerDelpushButton">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ClearData</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

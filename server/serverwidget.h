@@ -32,7 +32,7 @@ private slots:
     void NewLinten();     //建立TCP监听事件
     void AcceptConnect(); //等待客户端连接
     void ShowError(QAbstractSocket::SocketError); //显示Socket连接状态错误输出
-
+    void ClearRecvData();     //清空TextEdit控件接收到的数据
 
 
 
