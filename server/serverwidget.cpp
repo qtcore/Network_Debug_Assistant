@@ -65,9 +65,9 @@ void ServerWidget::SendMessage()
 
     QByteArray sendmessage = strdata.toLocal8Bit();  // 转换字符串为字节数组 数据
 
-    mchat += ("Server Send:" + sendmessage);
+   // mchat += ("Server Send:" + sendmessage);
 
-    ui->ServerReceDatatextEdit->setText(mchat);  //在本窗口的textEdit控件显示数据
+   // ui->ServerReceDatatextEdit->setText(mchat);  //在本窗口的textEdit控件显示数据
 
     tcpsocketob->write(sendmessage);   //向socket对象 写入字节数组 数据
 
@@ -109,6 +109,42 @@ void ServerWidget::RecvData()
 {
     QString data = tcpsocketob->readAll();  // 通过socket读取来自客户端的所有数据
 
+    //是否选中 将字符串转为 十六进制 字节数组
+    if(!ui->ServerHexcheckBox->isChecked())
+    {
+        qDebug() << "Text Format";
+        mchat += ("Recv Client " + data);
+        ui->ServerReceDatatextEdit->setText(mchat);
+
+    }else {
+
+        QByteArray strtohex = data.toUtf8().toHex().toUpper();   //将字符串转换为 十六进制数据，大写，支持中文
+
+        QByteArray hextemp = strtohex.right(2);   //将十六进制字节数据末尾的两个字符提取出来
+
+        int count = strtohex.length();  //获取字节数组长度
+
+        QByteArray Showhex;  // 存储完整格式的 十六进制数据 内容
+
+        //循环遍历字节数组,每次计数自增2， 每次提取2个字符
+        //i=28是字节数组 前面的 《当前时间》 数据， 不用显示出来
+        for(int i=28; i<count-2; i+=2)
+          {
+
+            QByteArray temp = strtohex.mid(i, 2);   //从字节数组i位置开始提取，每次提取2个字符
+
+            //每2个字符加上一个空格
+            Showhex += temp;
+            Showhex += " ";
+
+        }
+
+        Showhex = Showhex + hextemp;  //拼接完整 的十六进制字节数据
+        qDebug() << Showhex;
+        ui->ServerReceDatatextEdit->append(Showhex);  //UI界面textedit控件显示 十六进制数据
+
+}
+
     //检测是否选中--写入文件功能
     if(!ui->ServerCheckBox->isChecked())
     {
@@ -132,8 +168,8 @@ void ServerWidget::RecvData()
             }
 }
 
-    mchat += ("Recv Client " + data);
-    ui->ServerReceDatatextEdit->setText(mchat);
+    //mchat += ("Recv Client " + data);
+   // ui->ServerReceDatatextEdit->setText(mchat);
 
 
 }
