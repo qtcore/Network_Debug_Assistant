@@ -31,7 +31,7 @@ private slots:
     void SendMessage();  //发送消息给服务端
     void RecvData();     //接收来自服务端的数据
     void ShowError(QAbstractSocket::SocketError);  //输出错误
-
+    void ClearRecvData();     //清空TextEdit控件接收到的数据
 
 private:
     Ui::ClientWidget *ui;
