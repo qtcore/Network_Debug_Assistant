@@ -17,14 +17,21 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QCheckBox>
+#include <QTranslator>
+#include <QObject>
 
 ServerWidget::ServerWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ServerWidget)
 {
+    //QTranslator appTranslator;
+    // appTranslator.load("myexec_cn.qm");
+     //qApp->installTranslator(&appTranslator);
+
     ui->setupUi(this);
 
-    setWindowTitle(QString::fromLocal8Bit("Server")); //设置窗口标题
+    setWindowTitle(QString(tr("Server"))); //设置窗口标题
+
 
     init();
 
@@ -89,7 +96,7 @@ void ServerWidget::NewLinten()
 
     }
     else{
-           ui->ListenpushButton->setText("LintenOk");
+           ui->ListenpushButton->setText(tr("LintenOk"));
            qDebug() << "linten ok";
     }
 }
