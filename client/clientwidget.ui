@@ -97,7 +97,7 @@
     <rect>
      <x>240</x>
      <y>10</y>
-     <width>30</width>
+     <width>71</width>
      <height>16</height>
     </rect>
    </property>
@@ -147,8 +147,8 @@
   <widget class="QPushButton" name="ClientDelpushButton">
    <property name="geometry">
     <rect>
-     <x>148</x>
-     <y>56</y>
+     <x>180</x>
+     <y>60</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -162,7 +162,7 @@
     <rect>
      <x>90</x>
      <y>59</y>
-     <width>41</width>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>

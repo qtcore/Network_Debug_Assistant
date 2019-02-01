@@ -10,15 +10,18 @@
 #include <QString>
 #include <QMessageBox>
 #include <QCheckBox>
+#include <QTranslator>
+#include <QObject>
 
 
 ClientWidget::ClientWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ClientWidget)
 {
+
     ui->setupUi(this);
 
-    setWindowTitle(QString::fromLocal8Bit("Client"));
+    setWindowTitle(QString(tr("Client")));
 
     init();
 
@@ -67,7 +70,7 @@ void ClientWidget::ConnectServer()
 
         clientsocket->abort();
         clientsocket->connectToHost(QHostAddress(clientip),clientport); //建立连接
-        ui->ConnpushButton->setText("conneted ok");
+        ui->ConnpushButton->setText(tr("conneted ok"));
 
 
 }
