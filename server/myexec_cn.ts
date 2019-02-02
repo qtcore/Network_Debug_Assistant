@@ -64,13 +64,39 @@
         <translation>端口号:</translation>
     </message>
     <message>
-        <location filename="serverwidget.cpp" line="29"/>
+        <location filename="serverwidget.ui" line="183"/>
+        <source>state</source>
+        <translatorcomment>连接状态显示</translatorcomment>
+        <translation>连接状态显示</translation>
+    </message>
+    <message>
+        <location filename="serverwidget.cpp" line="33"/>
         <source>Server</source>
         <translatorcomment>网络调试服务端</translatorcomment>
         <translation>网络调试服务端</translation>
     </message>
     <message>
-        <location filename="serverwidget.cpp" line="94"/>
+        <location filename="serverwidget.cpp" line="97"/>
+        <source>Linten</source>
+        <translatorcomment>监听</translatorcomment>
+        <translation>监听</translation>
+    </message>
+    <message>
+        <location filename="serverwidget.cpp" line="101"/>
+        <source>Not monitored</source>
+        <translatorcomment>未监听</translatorcomment>
+        <translation>未监听</translation>
+    </message>
+    <message>
+        <location filename="serverwidget.cpp" line="110"/>
+        <location filename="serverwidget.cpp" line="114"/>
+        <source>LintenError</source>
+        <translatorcomment>监听错误</translatorcomment>
+        <translation>监听错误</translation>
+    </message>
+    <message>
+        <location filename="serverwidget.cpp" line="117"/>
+        <location filename="serverwidget.cpp" line="121"/>
         <source>LintenOk</source>
         <translatorcomment>监听成功</translatorcomment>
         <translation>监听成功</translation>

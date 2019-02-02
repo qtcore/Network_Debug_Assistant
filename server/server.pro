@@ -34,7 +34,7 @@ HEADERS += \
 FORMS += \
         serverwidget.ui
 
-TRANSLATIONS = myexec_zh_CN.ts
+TRANSLATIONS = myexec_cn.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -87,19 +87,43 @@ void ServerWidget::NewLinten()
     QString serverarrip = ui->ServerIPlineEdit->text(); //设置IP地址
     quint16 serverport = ui->ServerPortlineEdit->text().toUShort(); //设置端口号
 
-    //如果没有监听到
-    if(!tcpserverob->listen(QHostAddress(serverarrip),serverport))
+     QPalette pe;  //画笔对象
+     QFont ft( "Microsoft YaHei", 10, 75);      //字体对象,微软雅黑，10点大小，75加粗
+
+    //如果IP或端口号的LIneEdit控件为 空
+    if(serverarrip.isEmpty() || serverport == NULL)
     {
-        qDebug() <<  tcpserverob->errorString(); //输出错误
+        qDebug() << "input error";  //调试 输出 错误提示
+        ui->ListenpushButton->setText(tr("Linten"));
 
-        tcpserverob->close(); //关闭服务
+        pe.setColor(QPalette::WindowText,Qt::red);
+        ui->statuslabel->setPalette(pe);
+        ui->statuslabel->setText(tr("Not monitored"));
 
+    }else{
+        //如果没有监听到
+        if(!tcpserverob->listen(QHostAddress(serverarrip),serverport))
+        {
+            qDebug() <<  tcpserverob->errorString(); //输出错误
+
+            tcpserverob->close(); //关闭服务
+            ui->ListenpushButton->setText(tr("LintenError"));
+
+            pe.setColor(QPalette::WindowText,Qt::red);
+            ui->statuslabel->setPalette(pe);
+            ui->statuslabel->setText(tr("LintenError"));
+        }
+        else{
+               ui->ListenpushButton->setText(tr("LintenOk"));
+               qDebug() << "linten ok";
+
+               ui->statuslabel->setFont(ft);
+               ui->statuslabel->setText(tr("LintenOk"));
+        }
     }
-    else{
-           ui->ListenpushButton->setText(tr("LintenOk"));
-           qDebug() << "linten ok";
-    }
-}
+
+  }
+
 
 
 //等待客户端连接
